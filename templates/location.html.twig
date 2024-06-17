@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="relative overflow-x-auto">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr class="text-center">
+                <th>
+                    Stt
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    File name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Extension
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Size
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Path
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Content
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Access Time
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Modified Time
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for data in finder %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-center">
+                    <td>
+                        {{ loop.index }}
+                    </td>
+                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ data.getFilename() }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ data.getExtension() }}
+
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ data.getSize() }} (bytes)
+
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ data.getRelativePathname() }}
+
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ data.getContents() }}
+
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ data.getATime() | date("Y-m-d h:i:s") }}
+
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ data.getMTime() | date("Y-m-d h:i:s") }}
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
